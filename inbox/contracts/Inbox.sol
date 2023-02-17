@@ -11,12 +11,16 @@ contract Inbox {
     // is not needed for constructors anymore: To prevent a contract from being
     // created, it can be marked abstract. This makes the visibility concept
     // for constructors obsolete.
+    
     constructor(string memory initialMessage) {
         message = initialMessage;
     }
 
-    function 
-    setMessage(string memory newMessage) public {
+    // function Inbox(string initialMessage) public {
+    //     message = initialMessage;
+    // }
+
+    function setMessage(string memory newMessage) public {
         message = newMessage;
     }
 
