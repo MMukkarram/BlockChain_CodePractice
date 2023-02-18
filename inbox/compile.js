@@ -37,6 +37,7 @@ const input = {
 };
 
 var output = JSON.parse(solc.compile(JSON.stringify(input)));
+var outputContracts = output.contracts['Inbox.sol']['Inbox'];
 
 console.log(output);
 
@@ -48,8 +49,8 @@ console.log(output);
   this contracts folder only contain one contrain if it has multiple then multiple output keys will be exported.
 */
 
-exports.abi = output.contracts['Inbox.sol']['Inbox'].abi;
-exports.bytecode = output.contracts['Inbox.sol']['Inbox'].evm.bytecode.object;
+module.exports.abi = outputContracts.abi;  // Interface which is basically js api
+module.exports.bytecode = outputContracts.evm.bytecode.object;  // bytecode 
 
 
 
