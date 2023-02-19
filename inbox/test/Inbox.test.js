@@ -6,6 +6,7 @@ const {abi, bytecode}= require('../compile'); // getting interface (ABI) and dep
 
 let accounts;
 let inbox;
+let initializeMessage = "Hi. This is the message for Inbox constructor to initialize the message";
 beforeEach(async () => {
 
     // Get a list of all account (local account created by the ganache for testing. 
@@ -21,7 +22,7 @@ beforeEach(async () => {
     //Use one of these account for to deploy.
 
     inbox = await new web3.eth.Contract(abi)
-    .deploy({ data: bytecode, arguments: ['Hi. This is the message for Inbox constructor to initialize the message']})
+    .deploy({ data: bytecode, arguments: [initializeMessage]})
      // basically we pass bytecode and the contructor arguments in deploy which is used in Inbox constuctor.
     .send({from: accounts[0], gas:'1000000'}); 
     // we call send method to send the transactions and also mention some amount of gas fees which is required to complete the transaction
@@ -30,7 +31,18 @@ beforeEach(async () => {
 
 describe('Inbox Testing', () => {
     it('Deploys a contract', () => { 
-        console.log(inbox);
+        //console.log(inbox);
+        assert.ok(inbox.options.address);
+    });
+    it('Get Message Test', async () => { 
+        const msg = await inbox.methods.message().call();
+        assert.equal(msg,initializeMessage);
+    });
+    it('Set Message Test', async () => { 
+        let updateMessage = 'Bye Buddy..!!';
+        await inbox.methods.setMessage(updateMessage).send({from: accounts[0]});
+        const msg = await inbox.methods.message().call();
+        assert.equal(msg,updateMessage);
     });
 });
 
