@@ -19,3 +19,4 @@ For deployment run this command ( make sure you should be in main folder in this
  node [fileName.js] // In out case  node deploy.js.
 
 After deployment we get the address. now we can also able to see on https://goerli.etherscan.io/ by putting the address.
+In our case: https://goerli.etherscan.io/address/0x34d4B63B85Fb7033F7b00FcE2bcdD3856C4c6F3E
