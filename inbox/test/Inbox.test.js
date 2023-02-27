@@ -26,7 +26,6 @@ beforeEach(async () => {
      // basically we pass bytecode and the contructor arguments in deploy which is used in Inbox constuctor.
     .send({from: accounts[0], gas:'1000000'}); 
     // we call send method to send the transactions and also mention some amount of gas fees which is required to complete the transaction
-    
 });
 
 describe('Inbox Testing', () => {
